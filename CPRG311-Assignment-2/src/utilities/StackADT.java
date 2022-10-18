@@ -26,3 +26,6 @@ public interface StackADT<E> {
 
 	public void clear();
 }
+
+
+
