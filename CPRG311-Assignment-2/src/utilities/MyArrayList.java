@@ -1,5 +1,6 @@
 package utilities;
 
+
 import java.util.NoSuchElementException;
 
 public class MyArrayList<E> implements ListADT<E> {
@@ -14,15 +15,12 @@ public class MyArrayList<E> implements ListADT<E> {
 	
 	public MyArrayList() {
 		Object[] array = new Object[10];
+		
 	}
 	
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		
-		
-		int x = 5 + 5;
-		return 0;
+		return size;
 	}
 
 	@Override
