@@ -89,7 +89,7 @@ public interface QueueADT<E> {
 	public int size();
 	
 	/**
-		Fancy way of telling the program to clear the queue of all its elements
+		The dequeueAll method clears the queue of all its elements inside the data structure.
 	*/
 
 	public void dequeueAll();
