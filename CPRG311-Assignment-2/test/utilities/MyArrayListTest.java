@@ -315,7 +315,6 @@ class MyArrayListTest {
 		for(int i = 0; i < 15; i++) {
 			list.add("a " + i);
 		}
-		
 		assertTrue(list.get(14) != null);
 	}
 

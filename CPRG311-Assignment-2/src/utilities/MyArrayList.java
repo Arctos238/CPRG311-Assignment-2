@@ -125,9 +125,8 @@ public class MyArrayList<E> implements ListADT<E> {
 		} else {
 			E toReturn = (E) array[index];
 			array[index] = toChange;
+			return toReturn;
 		}
-
-		return null;
 	}
 
 	@Override
@@ -150,12 +149,20 @@ public class MyArrayList<E> implements ListADT<E> {
 		return false;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public E[] toArray(E[] toHold) throws NullPointerException {
 		if (size == 0) {
 			return null;
 		} else {
-			System.arraycopy(array, 0, toHold, 0, size);
+			if(toHold.length < size - 1) {
+				toHold = (E[]) new Object[size];
+			}
+			
+			for(int i = 0; i < size; i++) {
+				toHold[i] = (E) array[i];
+			}
+			
 			return toHold;
 		}
 	}
