@@ -30,18 +30,20 @@ public class MyArrayList<E> implements ListADT<E> {
 	@Override
 	public boolean add(int index, E toAdd) throws NullPointerException, IndexOutOfBoundsException {
 		if (index >= size) {
-			return false;
-		} 
-		
+			throw new IndexOutOfBoundsException();
+		} else if (toAdd == null) {
+			throw new NullPointerException();
+		}
+
 		if (size >= array.length) {
 			resize();
 		}
-		
+
 		size++;
-		for (int i = size; i > index; i--) { 
+		for (int i = size; i > index; i--) {
 			array[i] = array[i - 1];
-		} 
-		
+		}
+
 		array[index] = toAdd;
 		return true;
 
@@ -51,6 +53,8 @@ public class MyArrayList<E> implements ListADT<E> {
 	public boolean add(E toAdd) throws NullPointerException {
 		if (size >= array.length) {
 			resize();
+		} else if (toAdd == null) {
+			throw new NullPointerException();
 		}
 
 		array[size] = toAdd;
@@ -74,7 +78,7 @@ public class MyArrayList<E> implements ListADT<E> {
 		if (size == 0) {
 			return null;
 		} else if (index >= size) {
-			return null;
+			throw new IndexOutOfBoundsException();
 		} else {
 			return (E) array[index];
 		}
@@ -86,9 +90,10 @@ public class MyArrayList<E> implements ListADT<E> {
 		if (size == 0) {
 			return null;
 		} else if (index >= size) {
-			return null;
-		} else {
-			Object toReturn = array[index];
+			throw new IndexOutOfBoundsException();
+		}
+		else {
+			E toReturn = (E) array[index];
 			for (int i = index; i < size; i++) {
 				array[i] = array[i + 1];
 				if (index == size - 1) {
@@ -107,7 +112,7 @@ public class MyArrayList<E> implements ListADT<E> {
 			return null;
 		} else {
 			for (int i = 0; i < size; i++) {
-				if(((E)array[i]).equals(toRemove)) {
+				if (toRemove.equals(array[i])) {
 					remove(i);
 					return toRemove;
 				}
@@ -119,7 +124,9 @@ public class MyArrayList<E> implements ListADT<E> {
 	@Override
 	public E set(int index, E toChange) throws NullPointerException, IndexOutOfBoundsException {
 		if (index >= size) {
-			return null;
+			throw new IndexOutOfBoundsException();
+		} else if (toChange == null) {
+			throw new NullPointerException();
 		} else if (size == 0) {
 			return null;
 		} else {
@@ -138,9 +145,13 @@ public class MyArrayList<E> implements ListADT<E> {
 	public boolean contains(E toFind) throws NullPointerException {
 		if (size == 0) {
 			return false;
-		} else {
+		} else if (toFind == null) {
+			throw new NullPointerException();
+		}
+
+		else {
 			for (int i = 0; i < size; i++) {
-				if (array[i].equals(toFind)) {
+				if (toFind.equals(array[i])) {
 					return true;
 				}
 			}
@@ -152,24 +163,26 @@ public class MyArrayList<E> implements ListADT<E> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public E[] toArray(E[] toHold) throws NullPointerException {
-		if (size == 0) {
+		if (toHold == null) {
+			throw new NullPointerException();
+		} else if (size == 0) {
 			return null;
 		} else {
-			if(toHold.length < size - 1) {
+			if (toHold.length < size - 1) {
 				toHold = (E[]) new Object[size];
 			}
-			
-			for(int i = 0; i < size; i++) {
+
+			for (int i = 0; i < size; i++) {
 				toHold[i] = (E) array[i];
 			}
-			
+
 			return toHold;
 		}
 	}
-	
+
 	/**
-	 * Resizes the array so the array can input more elements. Resizes the array
-	 * to 1.5 times the current size of the array.
+	 * Resizes the array so the array can input more elements. Resizes the array to
+	 * 1.5 times the current size of the array.
 	 */
 	private void resize() {
 		Object[] tempArray = new Object[(int) (size * 1.5)];
