@@ -4,20 +4,20 @@ public interface QueueADT<E> {
 	
 	/**  
 		The enqueue method will add one specified element to the end of a queue of elements. We can use to push operation to add the element to the end of the queue of elements.
-		Precondition: A specified value will be supplied
-		Postcondition: If a value was specififed and there is not a restriction to the size of the queue, or some other restriction then the value will be added to the end of the queue
+		Precondition: A specified element will be supplied
+		Postcondition: If a value was specified and there is not a restriction to the size of the queue, or some other restriction then the value will be added to the end of the queue
 		
 		@param toAdd
-			A type E object that will be added to the end of the sequenece 
+			A type E object that will be added to the end of the sequence 
 		@return
-			This method will return a argument that will be pushed as a perameter
+			This method will return a argument that will be pushed as a parameter
 	*/
 
 	public void enqueue(E toAdd);
 	/**
 		The dequeue method will remove the first element of the queue. This function will throw NoSuchElementException  when the queue has no elements within the queue
 		Precondition: The queue length is greater than 0
-		Postcondtition:  If the queue is longer than 0, the first element within the queue will be removed, that element will be replaced by the next element within the queue
+		Postcondition:  If the queue is longer than 0, the first element within the queue will be removed, that element will be replaced by the next element within the queue
 		@return
 			This method will return the element that has been removed
 	
@@ -37,7 +37,7 @@ public interface QueueADT<E> {
 	
 	/**
 		The equals method will compare a specified object with a specified element within the queue to check for equality. This method implements the first-in-first-out stack
-		Precondition: A vaild number is provied that can be used to compare against the queue
+		Precondition: A valid number is provide that can be used to compare against the queue
 		Postcondition: If the value that has been specified is equal to the element within the queue, then the method will return a true, and will return falsse otherwise
 		@param  that
 			Object used to compare the equality
@@ -52,7 +52,7 @@ public interface QueueADT<E> {
 	/**
 		The iterator method will make a copy of every element of the queue and then place all of those elements into their respective place in the queue. After that the method will return iterator
 		Precondition: A queue with a length grater than 0
-		Postcondition: If the queue was gretaer than 0 then a iterator will be returned with all the of elements within the array within it
+		Postcondition: If the queue was greater than 0 then a iterator will be returned with all the of elements within the array within it
 		@return
 			returns an iterator that covers over all the items that are contained within this stack
 	*/
@@ -81,9 +81,9 @@ public interface QueueADT<E> {
 	
 	/**
 		The isFull method will scan the queue to see if there is a element for each of its possible spaces. Will respond with a true or a false depending on the outcome. This method is meant for queues of fixed size.
-		Precondition: The queue that is being tested must have a limit on how long it is allowed to. Aswell as a specified number of available spots in the queue
-		Postcondition: If there is a limit on the legnth of the queue, true will be returned if the number of elements within the queue is equal to the number of 
-		spots specifed, will return false if the number of elements is less than the specified number
+		Precondition: The queue that is being tested must have a limit on how long it is allowed to. As well as a specified number of available spots in the queue
+		Postcondition: If there is a limit on the length of the queue, true will be returned if the number of elements within the queue is equal to the number of 
+		spots specified, will return false if the number of elements is less than the specified number
 		@return
 			isFull will return True or False depending on the queue
 	*/
