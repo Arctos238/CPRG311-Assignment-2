@@ -3,23 +3,28 @@ package utilities;
 
 public class MyDLL<E> implements ListADT<E> {
 	private static final long serialVersionUID = -7140796753013938413L;
-//	
+
 	private int size;
-	private Node head;
-	private Node tail;
+	private Node<E> head;
+	private Node<E> tail;
 	
+	@SuppressWarnings("hiding")
 	private class Node<E>
 	{
-	    private E data;
-	    private Node next;
-	    private Node prev;
+	    private E element;
+	    private Node<E> next;
+	    private Node<E> prev;
 
-	    public Node(E data, Node next, Node prev)
+	    public Node(E element, Node<E> next, Node<E> prev)
 	    {
-	        this.data = data;
+	        this.element = element;
 	        this.next = next;
 	        this.prev = prev;
 	    }
+
+		public Node(ListADT<? extends E> toAdd) {
+			// TODO Auto-generated constructor stub
+		}
 	}
 
 	
@@ -34,6 +39,7 @@ public class MyDLL<E> implements ListADT<E> {
 		this.tail = null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean add(int index, E toAdd) throws NullPointerException, IndexOutOfBoundsException {
 		if(index > size || index < 0)
@@ -42,66 +48,113 @@ public class MyDLL<E> implements ListADT<E> {
 	    }
 	    if (head == null)
 	    {
-	        Node n = new Node(toAdd, null, null);
+	        Node<E> n = new Node<E>(toAdd, null, null);
 	        n.next = n;
 	        n.prev = n;
-	        head = n;
+	        this.head = n;
+	        this.tail = n;
 	    }
 	    else
 	        {
-	        Node current = head;
+	        Node<E> current = this.head;
 	        for (int i = 0; i < index; i++)
 	        {
 	            current = current.next;
 	        }
 	        //current points to node that will follow new node.
 	        
-			Node n2 = new Node(toAdd, current, current.prev);
+			Node<E> n2 = new Node<E>(toAdd, current, current.prev);
 	        current.prev.next = n2;
 	        current.prev = n2;
 	        //update first if necessary.
 	        if(index == 0)
 	        {
-	            head = n2;
+	            this.head = n2;
 	        }
 	    }
 	    size++;
 	    return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean add(E toAdd) throws NullPointerException {
-		if (head == null)
+		if (this.head == null)
 	    {
-	        head = new Node(toAdd, null, null);
-	        head.next = head;
-	        head.prev = head;
+	        this.head = new Node<E>(toAdd, null, null);
+	        this.head.next = head;
+	        this.head.prev = head;
 	    }
 	    else
 	        {
-	        head.prev.next = new Node(toAdd, head, head.prev);
-	        head.prev = head.prev.next;
+	        this.head.prev.next = new Node<E>(toAdd, head, head.prev);
+	        this.head.prev = head.prev.next;
 	    }
 	    size++;
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean addAll(ListADT<? extends E> toAdd) throws NullPointerException {
-		// TODO Auto-generated method stub
+		Node<E> temp = new Node<E>(toAdd);
+		add((E) temp);
+		while(temp != null) {
+			add((E) temp.next);
+		}
 		return false;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public E get(int index) throws IndexOutOfBoundsException {
-		// TODO Auto-generated method stub
-		return null;
+		 if(index < 0)
+		    {
+		        throw new IndexOutOfBoundsException();
+		    }
+		    if(index > size)
+		    {
+		        throw new IndexOutOfBoundsException();
+		    }
+		    Node<E> current = this.head;
+		    for (int i = 0; i < index; i++)
+		    {
+		        current = current.next;
+		    }
+		    return (E) current.element;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public E remove(int index) throws IndexOutOfBoundsException {
-		// TODO Auto-generated method stub
-		return null;
+		Node<E> removed = null;
+		 if(index < 0)
+		    {
+		        throw new IndexOutOfBoundsException();
+		    }
+		    if(index > size)
+		    {
+		        throw new IndexOutOfBoundsException();
+		    }
+		    if (this.head.element == null)
+		    {
+		        throw new IndexOutOfBoundsException();
+		    }
+		    else if (index == 0)
+		    {
+		        this.head = this.head.next;
+		    }
+		    else
+		        {
+		            Node<E> current = this.head.next;
+		            for (int i = 0; i < index; i++){
+		            current = current.next;
+		            removed = current;
+		        }
+		            current.next = current.next.next;
+		    }
+		    size--;
+		    return (E) removed;
 	}
 
 	@Override
