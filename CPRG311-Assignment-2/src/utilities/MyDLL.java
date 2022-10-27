@@ -1,32 +1,31 @@
 package utilities;
 
-public class MyDLL<E> implements ListADT<E>{
 
-	/**
-	 * 
-	 */
+public class MyDLL<E> implements ListADT<E> {
 	private static final long serialVersionUID = -7140796753013938413L;
+//	
+	private int size;
+	private Node head;
+	private Node tail;
+	
+	private class Node<E>
+	{
+	    private E data;
+	    private Node next;
+	    private Node prev;
 
-	private class Node{
-		E element;
-		Node head;
-		Node tail;
-		
-		public Node(E element, Node head, Node tail){
-			this.element = element;
-			this.head = head;
-			this.tail = tail;
-		}
+	    public Node(E data, Node next, Node prev)
+	    {
+	        this.data = data;
+	        this.next = next;
+	        this.prev = prev;
+	    }
 	}
 
+	
 	@Override
 	public int size() {
-		int res = 0;
-		while (node != null){
-			res++;
-			node = node.next;
-		}
-		return res;
+		return size;
 	}
 
 	@Override
@@ -37,40 +36,54 @@ public class MyDLL<E> implements ListADT<E>{
 
 	@Override
 	public boolean add(int index, E toAdd) throws NullPointerException, IndexOutOfBoundsException {
-		if (index < 0 || index > numElements) 
-		throw new InvalidArgumentException();
-		Node<E> newNode = new Node<E>(element);
-		if (head == null) {	
-			head = newNode;
-			tail = newNode;
-		}
-		else if (index == 0) {
-			newNode.next = head;
-			head.prev = newNode;
-			head = newNode;
-		}
-		else if (index == numElements) {
-			newNode.prev = tail;
-			tail.next = newNode;
-			tail = newNode;
-		}
-		else {	
-			Node<E> nodeRef = head;
-			for (int i = 1; i < index; i++) 
-				nodeRef = nodeRef.next;
-			newNode.next = nodeRef.next;
-			nodeRef.next = newNode;
-			newNode.prev = nodeRef;
-			newNode.next.prev = newNode;
-		}
-		numElements++;
-		return false;
+		if(index > size || index < 0)
+	    {
+	        throw new IndexOutOfBoundsException();
+	    }
+	    if (head == null)
+	    {
+	        Node n = new Node(toAdd, null, null);
+	        n.next = n;
+	        n.prev = n;
+	        head = n;
+	    }
+	    else
+	        {
+	        Node current = head;
+	        for (int i = 0; i < index; i++)
+	        {
+	            current = current.next;
+	        }
+	        //current points to node that will follow new node.
+	        
+			Node n2 = new Node(toAdd, current, current.prev);
+	        current.prev.next = n2;
+	        current.prev = n2;
+	        //update first if necessary.
+	        if(index == 0)
+	        {
+	            head = n2;
+	        }
+	    }
+	    size++;
+	    return true;
 	}
 
 	@Override
 	public boolean add(E toAdd) throws NullPointerException {
-		// TODO Auto-generated method stub
-		return false;
+		if (head == null)
+	    {
+	        head = new Node(toAdd, null, null);
+	        head.next = head;
+	        head.prev = head;
+	    }
+	    else
+	        {
+	        head.prev.next = new Node(toAdd, head, head.prev);
+	        head.prev = head.prev.next;
+	    }
+	    size++;
+		return true;
 	}
 
 	@Override
@@ -81,60 +94,14 @@ public class MyDLL<E> implements ListADT<E>{
 
 	@Override
 	public E get(int index) throws IndexOutOfBoundsException {
-		if (isEmpty()) {
-            System.out.println("List is empty");
-            return false;
-        }
-
-        Node curr = head;
-        while(curr != null && curr.data != key) {
-            curr = curr.next;
-        }
-
-        if (curr == null) {
-            return false;
-        }
-
-        return true;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public E remove(int index) throws IndexOutOfBoundsException {
-		 if (isEmpty()) {
-            System.out.println("List is empty");
-            return;
-        }
-
-        // find the position of the key
-        Node curr = head;
-
-        while(curr != null && curr.data != key) {
-            curr = curr.next;
-        }
-
-        if(curr == null) {
-            System.out.print("key not found");
-            return;
-        }
-
-        if (curr.prev == null) {
-            popFront();
-
-        } else if (curr.next == null) { // if curr is last item
-            popBack();
-
-        } else { //anywhere between first and last node
-            Node next = curr.next;
-            Node prev = curr.prev;
-
-            prev.next = next;
-            next.prev = prev;
-
-            curr.prev = null;
-            curr.next = null;
-            curr = null;
-        }
-		return true;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -151,7 +118,8 @@ public class MyDLL<E> implements ListADT<E>{
 
 	@Override
 	public boolean isEmpty() {
-		return head == null;
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
@@ -178,4 +146,8 @@ public class MyDLL<E> implements ListADT<E>{
 		return null;
 	}
 
+
+
+
+	
 }
