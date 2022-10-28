@@ -16,11 +16,14 @@ import org.junit.jupiter.api.Test;
 class MyDLLTest {
 	ListADT<String> list;
 	
+	
+	
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeEach
 	void setUp() throws Exception {
+		list = new MyDLL<>();
 	}
 
 	/**
@@ -28,6 +31,7 @@ class MyDLLTest {
 	 */
 	@AfterEach
 	void tearDown() throws Exception {
+		list = null;
 	}
 
 	/**
@@ -35,7 +39,11 @@ class MyDLLTest {
 	 */
 	@Test
 	void testSize() {
-		fail("Not yet implemented");
+		 assertFalse(list.size() != 0);
+		 
+		 list.add("J");
+		 
+		 assertTrue(list.size() == 1);
 	}
 
 	/**
@@ -43,7 +51,12 @@ class MyDLLTest {
 	 */
 	@Test
 	void testClear() {
-		fail("Not yet implemented");
+		assertFalse(list.size() != 0);
+		list.add("A");
+		list.add("B");
+		
+		list.clear();
+		assertTrue(list.size() == 0);
 	}
 
 	/**
@@ -51,7 +64,11 @@ class MyDLLTest {
 	 */
 	@Test
 	void testAddIntE() {
-		fail("Not yet implemented");
+		assertFalse(list.size() != 0);
+		list.add(0, "A");
+		
+		assertTrue(list.get(0).equals("A"));
+		list.clear();
 	}
 
 	/**
@@ -59,15 +76,32 @@ class MyDLLTest {
 	 */
 	@Test
 	void testAddE() {
-		fail("Not yet implemented");
+		list.add("A");
+		list.add("B");
+		list.add("C");
+		list.add("D");
+		
+		assertFalse(list.get(0).equals("D"));
+		assertTrue(list.get(0).equals("A"));
+		list.clear();
 	}
 
 	/**
 	 * Test method for {@link utilities.MyDLL#addAll(utilities.ListADT)}.
 	 */
+	@SuppressWarnings("null")
 	@Test
 	void testAddAll() {
-		fail("Not yet implemented");
+		ListADT<String> toInsert = new MyDLL<>();
+		
+		list.add("AB");
+		toInsert.add("A");
+		
+		
+		list.addAll(toInsert);
+		assertTrue(list.get(1).equals("A"));
+		assertFalse(list.get(0).equals(toInsert.get(0)));
+		
 	}
 
 	/**
@@ -75,7 +109,14 @@ class MyDLLTest {
 	 */
 	@Test
 	void testGet() {
-		fail("Not yet implemented");
+		list.add("A");
+		list.add("B");
+		list.add("C");
+		list.add("D");
+		
+		assertFalse(list.get(0).equals("D"));
+		assertTrue(list.get(0).equals("A"));
+		list.clear();
 	}
 
 	/**
@@ -83,7 +124,15 @@ class MyDLLTest {
 	 */
 	@Test
 	void testRemoveInt() {
-		fail("Not yet implemented");
+		list.add("A");
+		list.add("B");
+		list.add("C");
+		list.add("D");
+		
+		list.remove(0);
+		assertFalse(list.get(0).equals("A"));
+		assertTrue(list.get(0).equals("B"));
+		list.clear();
 	}
 
 	/**
