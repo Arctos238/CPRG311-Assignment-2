@@ -1,5 +1,6 @@
 package utilities;
 
+import java.util.ArrayList;
 
 public class MyDLL<E> implements ListADT<E> {
 	private static final long serialVersionUID = -7140796753013938413L;
@@ -159,44 +160,115 @@ public class MyDLL<E> implements ListADT<E> {
 
 	@Override
 	public E remove(E toRemove) throws NullPointerException {
-		// TODO Auto-generated method stub
-		return null;
+		Node<E> removed = null;
+		Node<E> current = this.head.next;
+		for(int i = 0; i <= size; i++) {
+			if(current.equals(toRemove)) {
+				removed = current;
+				current.prev = current.next;
+				current.next = current.prev;
+				break;
+			}
+			
+			current = current.next;
+		}
+		size--;	
+		return (E) removed;
 	}
 
 	@Override
 	public E set(int index, E toChange) throws NullPointerException, IndexOutOfBoundsException {
-		// TODO Auto-generated method stub
-		return null;
+		Node<E> changeTo = null;
+		Node<E> current = this.head.next;
+		if(index < 0) {
+	        throw new IndexOutOfBoundsException();
+	        
+	    } if(index > size) {
+	        throw new IndexOutOfBoundsException();
+	        
+	    } if (this.head.element == null) {
+	        throw new IndexOutOfBoundsException();
+	        
+	    } else if (index == 0) {
+	        this.head = this.head.next;
+	        
+	    }else{
+	    	for(int i = 0; i < index; i++) {
+	    		current = current.next;	
+	    	}
+	    	
+	    	current.element = toChange;
+	    	
+	    }
+		return (E) changeTo;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		if(this.head.equals(null) && this.tail.equals(null)) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	@Override
 	public boolean contains(E toFind) throws NullPointerException {
-		// TODO Auto-generated method stub
+		Node<E> current = this.head.next;
+		for(int i = 0; i <= size; i++) {
+			if(current.equals(toFind)) {
+				return true;
+			}
+			
+			current = current.next;
+		}
 		return false;
 	}
 
 	@Override
 	public E[] toArray(E[] toHold) throws NullPointerException {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<E> arr = new ArrayList<E>();
+		Node<E> current = this.head.next;
+		
+		for(int i = 0; i <= size; i++) {
+			if(!current.element.equals(toHold)) {
+				arr.add(current.element);
+				current = current.next;
+			}else{
+				break;
+			}
+		}
+		
+		return null; //Come back to later about value to return
 	}
 
 	@Override
 	public Object[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<E> arr = new ArrayList<E>();
+		Node<E> current = this.head.next;
+		
+		for(int i = 0; i <= size; i ++) {
+			arr.add(current.element);
+			current = current.next;
+		}
+		return null; //Come back to later about value to return
 	}
 
 	@Override
 	public Iterator<E> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<E> arr = new ArrayList<E>();
+		Node<E> current = this.head.next;
+		
+		for(int i = 0; i <= size; i ++) {
+			arr.add(current.element);
+			current = current.next;
+		
+		}
+		
+		java.util.Iterator<E> iterator = arr.iterator();
+		
+		
+		return (Iterator<E>) iterator;
 	}
 
 
