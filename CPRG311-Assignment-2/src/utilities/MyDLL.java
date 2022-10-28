@@ -95,15 +95,12 @@ public class MyDLL<E> implements ListADT<E> {
 		return true;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public boolean addAll(ListADT<? extends E> toAdd) throws NullPointerException {
-		Node<E> temp = new Node<E>(toAdd);
-		add((E) temp);
-		while(temp != null) {
-			add((E) temp.next);
+		for(int i = 0; i < toAdd.size(); i++) {
+			add(toAdd.get(i));
 		}
-		return false;
+		return true;
 	}
 
 	@SuppressWarnings("unchecked")
