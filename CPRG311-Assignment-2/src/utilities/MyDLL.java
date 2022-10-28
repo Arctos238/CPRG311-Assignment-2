@@ -103,23 +103,31 @@ public class MyDLL<E> implements ListADT<E> {
 		return true;
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	@Override
 	public E get(int index) throws IndexOutOfBoundsException {
-		 if(index < 0)
-		    {
-		        throw new IndexOutOfBoundsException();
-		    }
-		    if(index > size)
-		    {
-		        throw new IndexOutOfBoundsException();
-		    }
-		    Node<E> current = this.head;
-		    for (int i = 0; i < index; i++)
-		    {
-		        current = current.next;
-		    }
-		    return (E) current.element;
+		if (index < 0) {
+			throw new IndexOutOfBoundsException();
+		}
+		if (index >= size) {
+			throw new IndexOutOfBoundsException();
+		}
+		Node<E> current;
+
+		int firstHalf = this.size() / 2;
+
+		if (index <= firstHalf) {
+			current = this.head;
+			for (int i = 0; i < index; i++) {
+				current = current.next;
+			}
+		} else {
+			current = this.tail;
+			for (int i = this.size()-1; i > index; i--) {
+				current = current.prev;
+			}
+		}
+		return (E) current.element;
 	}
 
 	@SuppressWarnings("unchecked")
