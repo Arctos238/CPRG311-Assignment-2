@@ -80,18 +80,21 @@ public class MyDLL<E> implements ListADT<E> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean add(E toAdd) throws NullPointerException {
-		if (this.head == null)
-	    {
-	        this.head = new Node<E>(toAdd, null, null);
-	        this.head.next = head;
-	        this.head.prev = head;
-	    }
-	    else
-	        {
-	        this.head.prev.next = new Node<E>(toAdd, head, head.prev);
-	        this.head.prev = head.prev.next;
-	    }
-	    size++;
+		if (this.head == null) {
+			this.head = new Node<E>(toAdd, null, null);
+			this.head.next = head;
+			this.head.prev = head;
+			this.tail = head;
+			this.tail.next = head;
+			this.tail.prev = head;
+			
+		} else {
+			this.head.prev.next = new Node<E>(toAdd, head, head.prev);
+			this.head.prev = head.prev.next;
+			this.tail.prev = this.tail;
+			this.tail = head.prev.next;
+		}
+		size++;
 		return true;
 	}
 
