@@ -140,15 +140,66 @@ class MyDLLTest {
 	 */
 	@Test
 	void testRemoveE() {
-		fail("Not yet implemented");
+		list.add("A");
+		list.add("B");
+		list.add("C");
+		
+		list.remove("B");
+		list.contains("B");
+		assertTrue(list.contains("B"));
+		
+		
+	}
+	
+	/**
+	 * Test method for {@link utilities.MyDLL#set(int, java.lang.Object)}.
+	 */
+	@Test
+	void testSet() {
+		list.add("A");
+		list.add("B");
+		list.add("C");
+		
+		list.set(1, "Z");
+		
+		assertTrue(list.contains("Z"));
+		
 	}
 
 	/**
 	 * Test method for {@link utilities.MyDLL#set(int, java.lang.Object)}.
 	 */
 	@Test
-	void testSet() {
-		fail("Not yet implemented");
+	void testSetNull() {
+		list.add("A");
+		list.add("B");
+		list.add("C");
+		
+		try {
+			list.set(1, null);
+			fail("Didn't throw NullPointerException");
+		} catch (NullPointerException e) {
+			assertTrue(true);
+		}
+		
+	}
+
+	/**
+	 * Test method for {@link utilities.MyDLL#set(int, java.lang.Object)}.
+	 */
+	@Test
+	void testSetOutOfBounds() {
+		list.add("A");
+		list.add("B");
+		list.add("C");
+		
+		try {
+			list.set(4, "X");
+			fail("Didn't throw IndexOutOfBoundsException");
+		} catch (IndexOutOfBoundsException e) {
+			assertTrue(true);
+		}
+		
 	}
 
 	/**
@@ -156,7 +207,7 @@ class MyDLLTest {
 	 */
 	@Test
 	void testIsEmpty() {
-		fail("Not yet implemented");
+		assertTrue(list.isEmpty());
 	}
 
 	/**
@@ -164,7 +215,26 @@ class MyDLLTest {
 	 */
 	@Test
 	void testContains() {
-		fail("Not yet implemented");
+		list.add("A");
+		list.add("B");
+		list.add("C");
+		
+		assertTrue(list.contains("A"));
+	}
+	
+	/**
+	 * Test method for {@link utilities.MyDLL#contains(java.lang.Object)}.
+	 */
+	@Test
+	void testContainsNull() {
+		
+		try {
+			list.contains(null);
+			fail("Didn't throw NullPointerException");
+		} catch (NullPointerException e) {
+			assertTrue(true);
+		}
+		
 	}
 
 	/**
@@ -172,7 +242,38 @@ class MyDLLTest {
 	 */
 	@Test
 	void testToArrayEArray() {
-		fail("Not yet implemented");
+		list.add("A");
+		list.add("B");
+		list.add("C");
+		list.add("D");
+		String[] arrayTest = new String[4];
+		arrayTest[0] = "A";
+		arrayTest[0] = "B";
+		arrayTest[0] = "C";
+		arrayTest[0] = "D";
+
+		String[] array = new String[list.size()];
+		list.toArray(array);
+
+		assertTrue(array != null);
+		assertTrue(array[0].equals("A"));
+		assertTrue(array.getClass() == arrayTest.getClass());
+
+		Object[] objectArray = new Object[10];
+		assertFalse(array.getClass() == objectArray.getClass());
+	}
+	
+	/**
+	 * Test method for {@link utilities.MyArrayList#toArray(E[])}.
+	 */
+	@Test
+	void testToArrayENullValue() {
+		try {
+			list.toArray(null);
+			fail("Didn't throw NullPointerException");
+		} catch (NullPointerException e) {
+			assertTrue(true);
+		}
 	}
 
 	/**
@@ -180,7 +281,18 @@ class MyDLLTest {
 	 */
 	@Test
 	void testToArray() {
-		fail("Not yet implemented");
+		list.add("A");
+		list.add("B");
+		list.add("C");
+		list.add("D");
+
+		Object[] objectArray = list.toArray();
+
+		assertTrue(objectArray != null);
+		assertTrue(objectArray[0].equals("A"));
+
+		String[] arrayTest = new String[4];
+		assertFalse(objectArray.getClass() == arrayTest.getClass());
 	}
 
 	/**
@@ -188,7 +300,36 @@ class MyDLLTest {
 	 */
 	@Test
 	void testIterator() {
-		fail("Not yet implemented");
+		list.add("a");
+		list.add("b");
+		list.add("c");
+		Iterator<String> it = list.iterator();
+		assertTrue(it.hasNext());
+		int i = 0;
+		while (it.hasNext()) {
+			assertEquals(list.get(i++), it.next());
+		}
+		assertFalse(it.hasNext());
+
+		try {
+			it.next();
+			fail("NoSuchElementException didn't throw");
+		} catch (NoSuchElementException e) {
+			assertTrue(true);
+		}
+		
+		
+	}
+	
+	void testIteratorEmpty() {
+		Iterator<String> it = list.iterator();
+		assertFalse(it.hasNext());
+		try {
+			it.next();
+			fail("NoSuchElementException didn't throw");
+		} catch (NoSuchElementException e) {
+			assertTrue(true);
+		}
 	}
 
 }
