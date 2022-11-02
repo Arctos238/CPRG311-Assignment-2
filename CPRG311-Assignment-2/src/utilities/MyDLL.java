@@ -231,7 +231,7 @@ public class MyDLL<E> implements ListADT<E> {
 		} else if (size == 0) {
 			return false;
 		} else {
-			Node<E> current = this.head.next;
+			Node<E> current = this.head;
 			for (int i = 0; i <= size; i++) {
 				if (current.element.equals(toFind)) {
 					return true;

@@ -78,10 +78,16 @@ class MyDLLTest {
 	 */
 	@Test
 	void testAddE() {
-		list.add("A");
-		list.add("B");
-		list.add("C");
-		list.add("D");
+		String[] strings = {"A", "B", "C", "D"};		
+		
+		for (int i = 0; i < strings.length; i++) {
+			list.add(strings[i]);
+		}
+		
+		for (int i = 0; i < list.size(); i++) {
+			assertTrue(list.get(i).equals(strings[i]));
+		}
+		
 		
 		assertFalse(list.get(0).equals("D"));
 		assertTrue(list.get(0).equals("A"));
