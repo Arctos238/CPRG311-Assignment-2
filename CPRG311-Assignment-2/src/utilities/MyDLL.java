@@ -1,16 +1,11 @@
 package utilities;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-
-import java.lang.reflect.Method;
 import java.util.NoSuchElementException;
 
-import javax.lang.model.element.Element;
 
 public class MyDLL<E> implements ListADT<E> {
 	private static final long serialVersionUID = -7140796753013938413L;
 
-	
 	private int size;
 	private Node<E> head;
 	private Node<E> tail;
@@ -18,8 +13,8 @@ public class MyDLL<E> implements ListADT<E> {
 	@SuppressWarnings("hiding")
 	private class Node<E> {
 		private E element;
-		private Node<E> next;
-		private Node<E> prev;
+		Node<E> next;
+		Node<E> prev;
 
 		public Node(E element, Node<E> next, Node<E> prev) {
 			this.element = element;
@@ -27,9 +22,9 @@ public class MyDLL<E> implements ListADT<E> {
 			this.prev = prev;
 		}
 
-		public Node(ListADT<? extends E> toAdd) {
-			// TODO Auto-generated constructor stub
-		}
+		public Node(E element) {
+			this.element = element;
+		};
 	}
 
 	@Override
@@ -41,71 +36,72 @@ public class MyDLL<E> implements ListADT<E> {
 	public void clear() {
 		this.head = null;
 		this.tail = null;
+		size = 0;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean add(int index, E toAdd) throws NullPointerException, IndexOutOfBoundsException {
-		if(index > size || index < 0)
-	    {
-	        throw new IndexOutOfBoundsException();
-	    }
-	    if (head == null)
-	    {
-	        Node<E> n = new Node<E>(toAdd, null, null);
-	        n.next = n;
-	        n.prev = n;
-	        this.head = n;
-	        this.tail = n;
-	    }
-	    else
-	        {
-	        Node<E> current = this.head;
-	        for (int i = 0; i < index; i++)
-	        {
-	            current = current.next;
-	        }
-	        //current points to node that will follow new node.
-	        
+		if (index > size || index < 0) {
+			throw new IndexOutOfBoundsException();
+		} else if (toAdd == null) {
+			throw new NullPointerException();
+		}
+		if (head == null) {
+			Node<E> n = new Node<E>(toAdd, null, null);
+			n.next = n;
+			n.prev = n;
+			this.head = n;
+			this.tail = n;
+		} else {
+			Node<E> current = this.head;
+			for (int i = 0; i < index; i++) {
+				current = current.next;
+			}
+			// current points to node that will follow new node.
+
 			Node<E> n2 = new Node<E>(toAdd, current, current.prev);
-	        current.prev.next = n2;
-	        current.prev = n2;
-	        //update first if necessary.
-	        if(index == 0)
-	        {
-	            this.head = n2;
-	        }
-	    }
-	    size++;
-	    return true;
+			current.prev.next = n2;
+			current.prev = n2;
+			// update first if necessary.
+			if (index == 0) {
+				this.head = n2;
+			}
+		}
+		size++;
+		return true;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean add(E toAdd) throws NullPointerException {
-        if (this.head == null) {
-            this.head = new Node<E>(toAdd, null, null);
-            this.head.next = head;
-            this.head.prev = head;
-            this.tail = head;
-            this.tail.next = head;
-            this.tail.prev = head;
+		if(toAdd == null) {
+			throw new NullPointerException();
+		}
+		
+		Node newNode = new Node(toAdd);
 
-        } else {
-            this.head.prev.next = new Node<E>(toAdd, head, head.prev);
-            this.head.prev = head.prev.next;
-            this.tail.prev = this.tail;
-            this.tail = head.prev.next;
-        }
-        size++;
-        return true;
+		if (head == null) {
+			head = tail = newNode;
+			head.prev = null;
+			tail.next = null;
+		} else {
+			tail.next = newNode;
+			newNode.prev = tail;
+			tail = newNode;
+			tail.next = null;
+		}
+		size++;
+		return true;
 	}
-	
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean addAll(ListADT<? extends E> toAdd) throws NullPointerException {
-		for(int i = 0; i < toAdd.size(); i++) {
+		if(toAdd == null) {
+			throw new NullPointerException();
+		}
+		for (int i = 0; i < toAdd.size(); i++) {
 			add(toAdd.get(i));
 		}
 		return true;
@@ -131,7 +127,7 @@ public class MyDLL<E> implements ListADT<E> {
 			}
 		} else {
 			current = this.tail;
-			for (int i = this.size()-1; i > index; i--) {
+			for (int i = this.size() - 1; i > index; i--) {
 				current = current.prev;
 			}
 		}
@@ -164,54 +160,60 @@ public class MyDLL<E> implements ListADT<E> {
 		return (E) removed;
 	}
 
-	
 	@Override
 	public E remove(E toRemove) throws NullPointerException {
 		Node<E> removed = null;
 		Node<E> current = this.head.next;
-		if(toRemove == null) {
+		if (toRemove == null) {
 			throw new NullPointerException();
-		}else{
-			
-		for (int i = 0; i <= size; i++) {
-			if (current.equals(toRemove)) {
-				removed = current;
-				current.prev = current.next;
-				current.next = current.prev;
-				break;
-			}
+		} else {
 
-			current = current.next;
-		}
+			for (int i = 0; i <= size; i++) {
+				if (current.equals(toRemove)) {
+					removed = current;
+					current.prev = current.next;
+					current.next = current.prev;
+					break;
+				}
+
+				current = current.next;
+			}
 		}
 		size--;
-		return (E) removed;
+		return removed.element;
 	}
 
 	@Override
 	public E set(int index, E toChange) throws NullPointerException, IndexOutOfBoundsException {
+		E returnedElement = null;
 		if (index < 0) {
 			throw new IndexOutOfBoundsException();
-		} if (index > size) {
+		}
+		if (index > size) {
 			throw new IndexOutOfBoundsException();
-		} if (this.head.element == null) {
+		}
+		if (this.head.element == null) {
 			throw new IndexOutOfBoundsException();
-		} else if (toChange == null){ 
+		} else if (toChange == null) {
 			throw new NullPointerException();
-		}else if (index == 0) {
-			remove(index);
-			
-			add(index, toChange);
+		} else if (index == 0) {
+			returnedElement = this.head.element;
+			head.element = toChange;
 		} else {
-			remove(index);
+			Node<E> current = this.head;
+			int i = 0;
 			
-			add(index, toChange);
+			while(i < index) {
+				current = current.next;
+				i++;
+			}
+			
+			returnedElement = current.element;
+			current.element = toChange;
 		}
-		
-		return toChange;
-		}
-		
 
+		return returnedElement;
+	}
 
 	@Override
 	public boolean isEmpty() {
@@ -224,9 +226,9 @@ public class MyDLL<E> implements ListADT<E> {
 
 	@Override
 	public boolean contains(E toFind) throws NullPointerException {
-		if (toFind == null){
+		if (toFind == null) {
 			throw new NullPointerException();
-		}else if(size == 0) {
+		} else if (size == 0) {
 			return false;
 		} else {
 			Node<E> current = this.head.next;
@@ -258,7 +260,7 @@ public class MyDLL<E> implements ListADT<E> {
 			i++;
 		}
 
-		return toHold; 
+		return toHold;
 	}
 
 	@Override
@@ -271,7 +273,7 @@ public class MyDLL<E> implements ListADT<E> {
 			i++;
 		}
 
-		return toHold; 
+		return toHold;
 	}
 
 	@Override
@@ -280,12 +282,12 @@ public class MyDLL<E> implements ListADT<E> {
 	}
 
 	private class MyDDLIterator implements Iterator<E> {
-		Node<E> current = head.next;
-		private int pos;
+		private Node<E> current = head;
+		private int pos = 0;
 
 		@Override
 		public boolean hasNext() {
-			return pos < size ;
+			return pos < size;
 		}
 
 		@Override
@@ -301,6 +303,20 @@ public class MyDLL<E> implements ListADT<E> {
 
 		}
 
+	}
+
+	public static void main(String[] args) {
+		MyDLL<String> list = new MyDLL<String>();
+
+		for (int i = 0; i < 10; i++) {
+			list.add(i + "");
+		}
+
+		Iterator<String> it = list.iterator();
+
+		while (it.hasNext()) {
+			System.out.println(it.next());
+		}
 	}
 
 }

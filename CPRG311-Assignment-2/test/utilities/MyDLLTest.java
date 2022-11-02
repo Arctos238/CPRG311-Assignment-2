@@ -118,7 +118,12 @@ class MyDLLTest {
 		
 		assertFalse(list.get(0).equals("D"));
 		assertTrue(list.get(0).equals("A"));
-		list.clear();
+		
+		Iterator<String> it = list.iterator();
+		
+		while (it.hasNext()) {
+			System.out.println(it.next());
+		}
 	}
 
 	/**
