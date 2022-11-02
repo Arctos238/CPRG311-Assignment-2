@@ -14,12 +14,11 @@ public class MyArrayList<E> implements ListADT<E> {
 	private int size;
 
 	public MyArrayList() {
-<<<<<<< HEAD
+
 		Object[] array = new Object[10];
-		
-=======
+
 		array = new Object[10];
->>>>>>> branch 'master' of git@github.com:Arctos238/CPRG311-Assignment-2.git
+
 	}
 
 	@Override
