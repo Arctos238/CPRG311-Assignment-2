@@ -126,10 +126,7 @@ class MyDLLTest {
 		assertTrue(list.get(0).equals("A"));
 		
 		Iterator<String> it = list.iterator();
-		
-		while (it.hasNext()) {
-			System.out.println(it.next());
-		}
+	
 	}
 
 	/**
@@ -158,9 +155,7 @@ class MyDLLTest {
 		list.add("C");
 		
 		list.remove("B");
-		list.contains("B");
-		assertTrue(list.contains("B"));
-		
+		assertFalse(list.get(1).equals("B"));
 		
 	}
 	
@@ -233,6 +228,7 @@ class MyDLLTest {
 		list.add("C");
 		
 		assertTrue(list.contains("A"));
+		assertFalse(list.contains("H"));
 	}
 	
 	/**

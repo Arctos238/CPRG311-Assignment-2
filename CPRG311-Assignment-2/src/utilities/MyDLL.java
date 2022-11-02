@@ -2,7 +2,6 @@ package utilities;
 
 import java.util.NoSuchElementException;
 
-
 public class MyDLL<E> implements ListADT<E> {
 	private static final long serialVersionUID = -7140796753013938413L;
 
@@ -75,10 +74,10 @@ public class MyDLL<E> implements ListADT<E> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean add(E toAdd) throws NullPointerException {
-		if(toAdd == null) {
+		if (toAdd == null) {
 			throw new NullPointerException();
 		}
-		
+
 		Node newNode = new Node(toAdd);
 
 		if (head == null) {
@@ -98,7 +97,7 @@ public class MyDLL<E> implements ListADT<E> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean addAll(ListADT<? extends E> toAdd) throws NullPointerException {
-		if(toAdd == null) {
+		if (toAdd == null) {
 			throw new NullPointerException();
 		}
 		for (int i = 0; i < toAdd.size(); i++) {
@@ -163,16 +162,18 @@ public class MyDLL<E> implements ListADT<E> {
 	@Override
 	public E remove(E toRemove) throws NullPointerException {
 		Node<E> removed = null;
-		Node<E> current = this.head.next;
+		Node<E> current = this.head;
 		if (toRemove == null) {
 			throw new NullPointerException();
 		} else {
 
 			for (int i = 0; i <= size; i++) {
-				if (current.equals(toRemove)) {
+				if (current.element.equals(toRemove)) {
 					removed = current;
-					current.prev = current.next;
-					current.next = current.prev;
+					current.prev.next = current.next;
+					current.next.prev = current.prev;
+//					current.prev = null;
+//					current.next = null;
 					break;
 				}
 
@@ -202,12 +203,12 @@ public class MyDLL<E> implements ListADT<E> {
 		} else {
 			Node<E> current = this.head;
 			int i = 0;
-			
-			while(i < index) {
+
+			while (i < index) {
 				current = current.next;
 				i++;
 			}
-			
+
 			returnedElement = current.element;
 			current.element = toChange;
 		}
@@ -232,7 +233,7 @@ public class MyDLL<E> implements ListADT<E> {
 			return false;
 		} else {
 			Node<E> current = this.head;
-			for (int i = 0; i <= size; i++) {
+			for (int i = 0; i < size; i++) {
 				if (current.element.equals(toFind)) {
 					return true;
 				}
@@ -300,23 +301,7 @@ public class MyDLL<E> implements ListADT<E> {
 			} else {
 				throw new NoSuchElementException();
 			}
-
 		}
 
 	}
-
-	public static void main(String[] args) {
-		MyDLL<String> list = new MyDLL<String>();
-
-		for (int i = 0; i < 10; i++) {
-			list.add(i + "");
-		}
-
-		Iterator<String> it = list.iterator();
-
-		while (it.hasNext()) {
-			System.out.println(it.next());
-		}
-	}
-
 }
