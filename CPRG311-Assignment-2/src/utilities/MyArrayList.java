@@ -16,9 +16,7 @@ public class MyArrayList<E> implements ListADT<E> {
 
 	public MyArrayList() {
 
-		Object[] array = new Object[DEFAULT_SIZE];
-
-		array = new Object[10];
+		array = new Object[DEFAULT_SIZE];
 
 	}
 
