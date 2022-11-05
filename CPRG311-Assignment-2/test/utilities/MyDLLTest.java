@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * @author Arcto
+ * @author J.Pointer
  *
  */
 class MyDLLTest {
@@ -142,7 +142,6 @@ class MyDLLTest {
 		list.remove(0);
 		assertFalse(list.get(0).equals("A"));
 		assertTrue(list.get(0).equals("B"));
-		list.clear();
 	}
 
 	/**

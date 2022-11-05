@@ -26,7 +26,6 @@ public class MyStack<E> implements StackADT<E> {
 	
 	@Override
 	public void push(E toAdd) throws NullPointerException {
-		// TODO Auto-generated method stub
 		if (toAdd == null) {
 			throw new NullPointerException();
 		}
@@ -35,7 +34,6 @@ public class MyStack<E> implements StackADT<E> {
 
 	@Override
 	public E pop() throws EmptyStackException {
-		// TODO Auto-generated method stub
 		E element = stack.remove(stack.size() - 1); 
 		if (element == null) {
 			throw new EmptyStackException();
@@ -46,7 +44,6 @@ public class MyStack<E> implements StackADT<E> {
 
 	@Override
 	public E peek() throws EmptyStackException {
-		// TODO Auto-generated method stub
 		E element = stack.get(stack.size() - 1);
 		if (element == null) {
 			throw new EmptyStackException();
@@ -57,13 +54,11 @@ public class MyStack<E> implements StackADT<E> {
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
 		stack.clear();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
 		if (stack.isEmpty()) {
 			return true;
 		} else {
@@ -74,7 +69,6 @@ public class MyStack<E> implements StackADT<E> {
 
 	@Override
 	public Object[] toArray() throws EmptyStackException{
-		// TODO Auto-generated method stub
 		if (stack.size() == 0) {
 			throw new EmptyStackException();
 		}
@@ -83,7 +77,6 @@ public class MyStack<E> implements StackADT<E> {
 
 	@Override
 	public E[] toArray(E[] holder) throws NullPointerException, EmptyStackException {
-		// TODO Auto-generated method stub
 		if (stack.size() == 0) {
 			throw new EmptyStackException();
 		}
@@ -95,7 +88,6 @@ public class MyStack<E> implements StackADT<E> {
 
 	@Override
 	public boolean contains(E toFind) throws NullPointerException {
-		// TODO Auto-generated method stub
 		if (toFind == null) {
 			throw new NullPointerException();
 		}
@@ -104,7 +96,6 @@ public class MyStack<E> implements StackADT<E> {
 
 	@Override
 	public int search(E toFind) throws NullPointerException {
-		// TODO Auto-generated method stub
 		if (toFind == null) {
 			throw new NullPointerException();
 		}
@@ -119,14 +110,12 @@ public class MyStack<E> implements StackADT<E> {
 
 	@Override
 	public Iterator<E> iterator() {
-		// TODO Auto-generated method stub
 		return stack.iterator();
 	}
 	
 
 	@Override
 	public boolean equals(StackADT<E> that) {
-		// TODO Auto-generated method stub
 		StackADT<E> auxStack = new MyStack<>();
 		boolean equal = true;
 		while(!stack.isEmpty() && !that.isEmpty()) {
@@ -153,7 +142,6 @@ public class MyStack<E> implements StackADT<E> {
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
 		return stack.size();
 	}
 

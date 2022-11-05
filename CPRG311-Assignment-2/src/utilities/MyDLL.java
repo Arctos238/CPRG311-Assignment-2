@@ -8,6 +8,12 @@ public class MyDLL<E> implements ListADT<E> {
 	private int size;
 	private Node<E> head;
 	private Node<E> tail;
+	
+	public MyDLL() {
+		size = 0;
+		head = null;
+		tail = null;
+	}
 
 	@SuppressWarnings("hiding")
 	private class Node<E> {
@@ -24,6 +30,14 @@ public class MyDLL<E> implements ListADT<E> {
 		public Node(E element) {
 			this.element = element;
 		};
+	}
+
+	public Node<E> getHead() {
+		return head;
+	}
+
+	public Node<E> getTail() {
+		return tail;
 	}
 
 	@Override
@@ -146,17 +160,21 @@ public class MyDLL<E> implements ListADT<E> {
 		if (this.head.element == null) {
 			throw new IndexOutOfBoundsException();
 		} else if (index == 0) {
+			removed = this.head;
 			this.head = this.head.next;
 		} else {
 			Node<E> current = this.head.next;
 			for (int i = 0; i < index; i++) {
 				current = current.next;
-				removed = current;
 			}
-			current.next = current.next.next;
+			removed = current;
+			current.prev.next = current.next;
+			current.next.prev = current.prev;
+			current.prev = null;
+			current.next = null;
 		}
 		size--;
-		return (E) removed;
+		return removed.element;
 	}
 
 	@Override
@@ -167,14 +185,13 @@ public class MyDLL<E> implements ListADT<E> {
 			throw new NullPointerException();
 		} else {
 
-			for (int i = 0; i <= size; i++) {
+			for (int i = 0; removed == null && i <= size; i++) {
 				if (current.element.equals(toRemove)) {
 					removed = current;
 					current.prev.next = current.next;
 					current.next.prev = current.prev;
-//					current.prev = null;
-//					current.next = null;
-					break;
+					current.prev = null;
+					current.next = null;
 				}
 
 				current = current.next;
@@ -218,11 +235,7 @@ public class MyDLL<E> implements ListADT<E> {
 
 	@Override
 	public boolean isEmpty() {
-		if (this.head == null && this.tail == null) {
-			return true;
-		} else {
-			return false;
-		}
+		return size == 0;
 	}
 
 	@Override

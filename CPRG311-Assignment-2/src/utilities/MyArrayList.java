@@ -12,10 +12,11 @@ public class MyArrayList<E> implements ListADT<E> {
 
 	private Object[] array;
 	private int size;
+	private final int DEFAULT_SIZE = 10;
 
 	public MyArrayList() {
 
-		Object[] array = new Object[10];
+		Object[] array = new Object[DEFAULT_SIZE];
 
 		array = new Object[10];
 
