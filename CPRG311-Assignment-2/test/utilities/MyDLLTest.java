@@ -109,7 +109,6 @@ class MyDLLTest {
 		list.addAll(toInsert);
 		assertTrue(list.get(1).equals("A"));
 		assertFalse(list.get(0).equals(toInsert.get(0)));
-		
 	}
 
 	/**
@@ -123,9 +122,7 @@ class MyDLLTest {
 		list.add("D");
 		
 		assertFalse(list.get(0).equals("D"));
-		assertTrue(list.get(0).equals("A"));
-		
-		Iterator<String> it = list.iterator();
+		assertTrue(list.get(0).equals("A"));	
 	
 	}
 
@@ -155,6 +152,7 @@ class MyDLLTest {
 		
 		list.remove("B");
 		assertFalse(list.get(1).equals("B"));
+		assertTrue(list.size() == 2);
 		
 	}
 	
@@ -170,7 +168,7 @@ class MyDLLTest {
 		list.set(1, "Z");
 		
 		assertTrue(list.contains("Z"));
-		
+		assertTrue(list.get(1) == "Z");
 	}
 
 	/**
