@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
  * @author J.Pointer
  *
  */
-class MyDLLTest {
+class MyDLLTests {
 	ListADT<String> list;
 	
 	

@@ -17,7 +17,7 @@ import exceptions.EmptyQueueException;
  * @author J.Pointer
  *
  */
-class MyQueueTest {
+class MyQueueTests {
 	private MyQueue<String> queue;
 
 	/**
