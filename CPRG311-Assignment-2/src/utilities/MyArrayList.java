@@ -27,7 +27,7 @@ public class MyArrayList<E> implements ListADT<E> {
 
 	@Override
 	public void clear() {
-		array = new Object[10];
+		array = new Object[DEFAULT_SIZE];
 		size = 0;
 	}
 
@@ -98,7 +98,7 @@ public class MyArrayList<E> implements ListADT<E> {
 		}
 		else {
 			E toReturn = (E) array[index];
-			for (int i = index; i < size; i++) {
+			for (int i = index; i < size - 1; i++) {
 				array[i] = array[i + 1];
 				if (index == size - 1) {
 					array[index] = null;
