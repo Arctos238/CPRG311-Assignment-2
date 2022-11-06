@@ -3,6 +3,8 @@ package driver;
 import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import exceptions.EmptyQueueException;
 import manager.IOManager;
@@ -17,38 +19,24 @@ public class ParserDriver {
 		IOManager ioManager = new IOManager();
 		ParserManager pManager = new ParserManager();
 
-		MyQueue<String> eQueue = new MyQueue<>();
-		MyStack<String> stack = new MyStack<>();
+		
 
 		try {
-			Scanner fileScanner = ioManager.openFile(FILE_LOCATION_TWO);
-
-			while (fileScanner.hasNext()) {
-				String line = fileScanner.nextLine().trim();
-
-				String[] tags = line.split(" ");
-				
-				for(int i = 0; i < tags.length; i++) {
-					System.out.println(tags[i]);
-				} 
-				System.out.println();
-
-			}
-
-			fileScanner.close();
-
-
+			System.out.println();
+			Scanner fileScanner = ioManager.openFile(FILE_LOCATION_ONE);
+			MyQueue<String> errorQueue =  pManager.parseXML(fileScanner);
+			pManager.printErrorQueue(errorQueue);
+			
+			System.out.println();
+			fileScanner = ioManager.openFile(FILE_LOCATION_TWO);
+			errorQueue =  pManager.parseXML(fileScanner);
+			pManager.printErrorQueue(errorQueue);
+			
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (NoSuchElementException e) {
 			e.printStackTrace();
-		}
-		
-		Iterator<String> it = eQueue.iterator();
-		System.out.println("Queue Starts:");
-		while (it.hasNext()) {
-			System.out.println(it.next());
 		}
 	}
 }
