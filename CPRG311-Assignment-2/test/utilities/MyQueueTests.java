@@ -13,15 +13,20 @@ import org.junit.jupiter.api.Test;
 
 import exceptions.EmptyQueueException;
 
+
 /**
  * @author J.Pointer
  *
  */
 class MyQueueTests {
+	
+	/** The queue. */
 	private MyQueue<String> queue;
 
 	/**
-	 * @throws java.lang.Exception
+	 * Sets the up.
+	 *
+	 * @throws Exception the exception
 	 */
 	@BeforeEach
 	void setUp() throws Exception {
@@ -29,7 +34,9 @@ class MyQueueTests {
 	}
 
 	/**
-	 * @throws java.lang.Exception
+	 * Tear down.
+	 *
+	 * @throws Exception the exception
 	 */
 	@AfterEach
 	void tearDown() throws Exception {
@@ -67,6 +74,9 @@ class MyQueueTests {
 		}
 	}
 
+	/**
+	 * Test multiple enqueues.
+	 */
 	void testMultipleEnqueues() {
 		queue.enqueue("A");
 		queue.enqueue("B");

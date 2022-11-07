@@ -3,6 +3,7 @@ package utilities;
 import java.util.*;
 import java.io.*;
 
+// TODO: Auto-generated Javadoc
 /**
  * This is the professional Stack Interface for Advanced Object 
  * Oriented Programming (CRPG 311) at the SAIT Polytechnic.
@@ -13,9 +14,10 @@ import java.io.*;
  * Created On: June 4, 2004
  * Updated On: Aug. 18, 2009
  * Updated On: Nov 15, 2018 by kitty
- * 
+ *
  * @author Don Heninger and Dave Watson
  * @version 1.1
+ * @param <E> the element type
  */
 public interface StackADT<E> extends Serializable
 {
@@ -43,9 +45,9 @@ public interface StackADT<E> extends Serializable
 	/**
 	 * Looks at the object at the top of this stack without removing it from the
 	 * stack.
-	 * 
+	 *
 	 * @return the object at the top of this stack.
-	 * @throws EmptyStackException
+	 * @throws EmptyStackException the empty stack exception
 	 */
 	public E peek() throws EmptyStackException;
 
@@ -76,14 +78,10 @@ public interface StackADT<E> extends Serializable
 	 * sequence; the runtime type of the returned array is that of the specified
 	 * array. Obeys the general contract of the Collection.toArray(Object[])
 	 * method.
-	 * 
-	 * @param toHold
-	 *            the array into which the elements of this stack are to be
-	 *            stored, if it is big enough; otherwise, a new array of the
-	 *            same runtime type is allocated for this purpose.
+	 *
+	 * @param holder the holder
 	 * @return an array containing the elements of this stack.
-	 * @throws NullPointerException
-	 *             if the specified array is null.
+	 * @throws NullPointerException             if the specified array is null.
 	 */
 	public E[] toArray( E[] holder ) throws NullPointerException;
 

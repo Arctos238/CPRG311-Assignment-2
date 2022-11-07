@@ -11,16 +11,21 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+
 /**
- * @author J.Pointer
+ * The Class MyArrayListTests.
  *
+ * @author J.Pointer
  */
 class MyArrayListTests {
 
+	/** The list. */
 	ListADT<String> list;
 
 	/**
-	 * @throws java.lang.Exception
+	 * Sets the up.
+	 *
+	 * @throws Exception the exception
 	 */
 	@BeforeEach
 	void setUp() throws Exception {
@@ -29,7 +34,9 @@ class MyArrayListTests {
 	}
 
 	/**
-	 * @throws java.lang.Exception
+	 * Tear down.
+	 *
+	 * @throws Exception the exception
 	 */
 	@AfterEach
 	void tearDown() throws Exception {
@@ -120,6 +127,19 @@ class MyArrayListTests {
 			assertTrue(true);
 		}
 	}
+	
+	/**
+	 * Test method for {@link utilities.MyArrayList#add(int, java.lang.Object)}.
+	 */
+	@Test
+	void testAddIntEMinusIndexOutOfBoundsException() {
+		try {
+			list.add(-5, "S");
+			fail("Didn't throw IndexOutOfBoundsException");
+		} catch (IndexOutOfBoundsException e) {
+			assertTrue(true);
+		}
+	}
 
 	/**
 	 * Test method for {@link utilities.MyArrayList#add(java.lang.Object)}.
@@ -148,7 +168,7 @@ class MyArrayListTests {
 	 */
 	@Test
 	void testAddAll() {
-		ListADT<String> listTwo = new MyArrayList();
+		ListADT<String> listTwo = new MyArrayList<>();
 		listTwo.add("A");
 		listTwo.add("B");
 		listTwo.add("C");

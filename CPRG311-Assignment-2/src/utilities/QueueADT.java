@@ -3,6 +3,7 @@ package utilities;
 import exceptions.EmptyQueueException;
 import java.io.*;
 
+// TODO: Auto-generated Javadoc
 /**
  * This is the professional Queue Interface for Advanced Object 
  * Oriented Programming (CRPG 311) at SAIT Polytechnic.
@@ -15,7 +16,9 @@ import java.io.*;
  * Updated On: Nov 15, 2018 by kitty
  * 
  * Queue.java
+ *
  * @author Don Heninger & Dave Watson
+ * @param <E> the element type
  */
 public interface QueueADT<E> extends Serializable
 {
@@ -87,14 +90,10 @@ public interface QueueADT<E> extends Serializable
 	 * sequence; the runtime type of the returned array is that of the specified
 	 * array. Obeys the general contract of the Collection.toArray(Object[])
 	 * method.
-	 * 
-	 * @param toHold
-	 *            the array into which the elements of this queue are to be
-	 *            stored, if it is big enough; otherwise, a new array of the
-	 *            same runtime type is allocated for this purpose.
+	 *
+	 * @param holder the holder
 	 * @return an array containing the elements of this queue.
-	 * @throws NullPointerException
-	 *          if the specified array is null.
+	 * @throws NullPointerException          if the specified array is null.
 	 */
 	public E[] toArray( E[] holder ) throws NullPointerException;
 	
